@@ -1,6 +1,6 @@
 <?php
 
-if( isset( $_POST[ 'Login' ] ) ) {
+if( isset( $_POST[ 'submit' ] ) ) {
 
 	// Sanitise username input
 	$user = $_POST[ 'username' ];
