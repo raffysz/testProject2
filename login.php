@@ -12,10 +12,10 @@ if(isset($_POST["submit"]))
 	{
 		// Define $username and $password
 		$username=$_POST['username'];
-		$username=mysqli_real_escape_string( $username );
+		$username=mysqli_real_escape_string( $db, $username );
 
 		$password=$_POST['password'];
-		$password=mysqli_real_escape_string( $passworde );
+		$password=mysqli_real_escape_string( $db, $password );
 
 
 
