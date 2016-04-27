@@ -12,19 +12,17 @@ if(isset($_POST["submit"]))
 	{
 		$user = $_POST[ 'username' ];
 		$user = stripslashes( $user );
-		$user = mysql_real_escape_string( $user );
+		$user = mysqli_real_escape_string( $user );
 
 		$pass = $_POST[ 'password' ];
 		$pass = stripslashes( $pass );
-		$pass = mysql_real_escape_string( $pass );
-
-
+		$pass = mysqli_real_escape_string( $pass );
 
 		$query  = "SELECT * FROM `users` WHERE username = '$user' AND password = '$pass';";
-		$result = mysql_query( $query ) or die( '<pre>' . mysql_error() . '</pre>' );
+		$result = mysqli_query( $query ) or die( '<pre>' . mysqli_error() . '</pre>' );
 
-		if( $result && mysql_num_rows( $result ) == 1 ) {
-			$_SESSION['username'] = $username; // Initializing Session
+		if( $result && mysqli_num_rows( $result ) == 1 ) {
+			$_SESSION['username'] = $user; // Initializing Session
 			header("location: photos.php"); // Redirecting To Other Page
 		}
 		else {
@@ -33,7 +31,7 @@ if(isset($_POST["submit"]))
 			$error =  "<pre><br />Username and/or password incorrect.</pre>";
 		}
 
-		mysql_close();
+		mysqli_close();
 	}
 
 }
