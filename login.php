@@ -12,11 +12,10 @@ if(isset($_POST["submit"]))
 	{
 		// Define $username and $password
 		$username=$_POST['username'];
-		$username=mysqli_real_escape_string( $db, $username );
-
 		$password=$_POST['password'];
-		$password=mysqli_real_escape_string( $db, $password );
-		
+
+
+
 		//Check username and password from database
 		$sql="SELECT userID FROM users WHERE username='$username' and password='$password'";
 		$result=mysqli_query($db,$sql);
@@ -31,11 +30,8 @@ if(isset($_POST["submit"]))
 			header("location: photos.php"); // Redirecting To Other Page
 		}else
 		{
-			sleep( rand( 0, 3 ) );
 			$error = "Incorrect username or password.";
 		}
-
-		mysqli_close();
 
 	}
 }
