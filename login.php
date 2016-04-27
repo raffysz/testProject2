@@ -1,6 +1,6 @@
 <?php
 $error = ""; //Variable for storing our errors.
-if( isset( $_GET[ 'Login' ] ) ) {
+if( isset( $_GET[ 'submit' ] ) ) {
 
 	// Sanitise username input
 	$user = $_GET[ 'username' ];
@@ -14,7 +14,7 @@ if( isset( $_GET[ 'Login' ] ) ) {
 	$pass = md5( $pass );
 
 	// Check database
-	$query  = "SELECT * FROM `users` WHERE user = '$user' AND password = '$pass';";
+	$query  = "SELECT * FROM `users` WHERE username = '$user' AND password = '$pass';";
 	$result = mysql_query( $query ) or die( '<pre>' . mysql_error() . '</pre>' );
 
 	if( $result && mysql_num_rows( $result ) == 1 ) {
