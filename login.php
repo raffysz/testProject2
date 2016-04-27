@@ -55,7 +55,7 @@ if( isset( $_POST[ 'submit' ] ) ) {
 		$failed_login = $row[ 'failed_login' ];
 		$last_login   = $row[ 'last_login' ];
 
-		$_SESSION['username'] = $username; // Initializing Session
+		$_SESSION['username'] = $user; // Initializing Session
 			header("location: photos.php"); // Redirecting To Other Page
 
 		// Had the account been locked out since last login?
