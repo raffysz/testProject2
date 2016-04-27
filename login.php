@@ -11,15 +11,15 @@ if(isset($_POST["submit"]))
 	}else
 	{
 		// Sanitise username input
-		$username = $_POST[ 'username' ];
-		$username = stripslashes( $username );
-		$username = mysql_real_escape_string( $username );
+		$user = $_POST[ 'username' ];
+		$user = stripslashes( $user );
+		$user = mysql_real_escape_string( $user );
 
 		// Sanitise password input
-		$password = $_POST[ 'password' ];
-		$password = stripslashes( $password );
-		$password = mysql_real_escape_string( $password );
-		$password = md5( $password );
+		$pass = $_POST[ 'password' ];
+		$pass = stripslashes( $pass );
+		$pass = mysql_real_escape_string( $pass );
+		$pass = md5( $pass );
 
 		// Default values
 		$total_failed_login = 3;
@@ -27,8 +27,8 @@ if(isset($_POST["submit"]))
 		$account_locked     = false;
 
 		// Check the database (Check user information)
-		$data = $db->prepare( 'SELECT failed_login, last_login FROM users WHERE user = (:username) LIMIT 1;' );
-		$data->bindParam( ':username', $username, PDO::PARAM_STR );
+		$data = $db->prepare( 'SELECT failed_login, last_login FROM users WHERE username = (:user) LIMIT 1;' );
+		$data->bindParam( ':user', $user, PDO::PARAM_STR );
 		$data->execute();
 		$row = $data->fetch();
 
@@ -49,9 +49,9 @@ if(isset($_POST["submit"]))
 		}
 
 		// Check the database (if username matches the password)
-		$data = $db->prepare( 'SELECT * FROM users WHERE user = (:username) AND password = (:password) LIMIT 1;' );
-		$data->bindParam( ':username', $username, PDO::PARAM_STR);
-		$data->bindParam( ':password', $password, PDO::PARAM_STR );
+		$data = $db->prepare( 'SELECT * FROM users WHERE username = (:user) AND password = (:password) LIMIT 1;' );
+		$data->bindParam( ':user', $user, PDO::PARAM_STR);
+		$data->bindParam( ':password', $pass, PDO::PARAM_STR );
 		$data->execute();
 		$row = $data->fetch();
 
@@ -60,11 +60,11 @@ if(isset($_POST["submit"]))
 		//Otherwise echo error.
 
 		if( ( $data->rowCount() == 1 ) && ( $account_locked == false ) ) {
-			$_SESSION['username'] = $username; // Initializing Session
+			$_SESSION['username'] = $user; // Initializing Session
 
 			// Reset bad login count
-			$data = $db->prepare( 'UPDATE users SET failed_login = "0" WHERE user = (:username) LIMIT 1;' );
-			$data->bindParam( ':username', $username, PDO::PARAM_STR );
+			$data = $db->prepare( 'UPDATE users SET failed_login = "0" WHERE username = (:user) LIMIT 1;' );
+			$data->bindParam( ':user', $user, PDO::PARAM_STR );
 			$data->execute();
 
 			header("location: photos.php"); // Redirecting To Other Page
@@ -78,14 +78,14 @@ if(isset($_POST["submit"]))
 			$error = "<pre><br />Username and/or password incorrect.<br /><br/>Alternative, the account has been locked because of too many failed logins.<br />If this is the case, <em>please try again in {$lockout_time} minutes</em>.</pre>";
 
 			// Update bad login count
-			$data = $db->prepare( 'UPDATE users SET failed_login = (failed_login + 1) WHERE user = (:username) LIMIT 1;' );
-			$data->bindParam( ':username', $username, PDO::PARAM_STR );
+			$data = $db->prepare( 'UPDATE users SET failed_login = (failed_login + 1) WHERE username = (:user) LIMIT 1;' );
+			$data->bindParam( ':user', $user, PDO::PARAM_STR );
 			$data->execute();
 		}
 
 		// Set the last login time
-		$data = $db->prepare( 'UPDATE users SET last_login = now() WHERE user = (:username) LIMIT 1;' );
-		$data->bindParam( ':username', $username, PDO::PARAM_STR );
+		$data = $db->prepare( 'UPDATE users SET last_login = now() WHERE username = (:user) LIMIT 1;' );
+		$data->bindParam( ':user', $user, PDO::PARAM_STR );
 		$data->execute();
 
 	}
