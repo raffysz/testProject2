@@ -2,8 +2,6 @@
 <?php
 
 if( isset( $_GET[ 'submit' ] ) ) {
-	// Check Anti-CSRF token
-	checkToken( $_REQUEST[ 'user_token' ], $_SESSION[ 'session_token' ], 'index.php' );
 
 	// Sanitise username input
 	$user = $_GET[ 'username' ];
@@ -33,7 +31,5 @@ if( isset( $_GET[ 'submit' ] ) ) {
 	mysql_close();
 }
 
-// Generate Anti-CSRF token
-generateSessionToken();
 
 ?>
