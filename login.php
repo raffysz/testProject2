@@ -1,6 +1,8 @@
 <?php
 
-if( isset( $_POST[ 'submit' ] ) ) {
+if( isset( $_POST[ 'Login' ] ) ) {
+	// Check Anti-CSRF token
+	checkToken( $_REQUEST[ 'user_token' ], $_SESSION[ 'session_token' ], 'index.php' );
 
 	// Sanitise username input
 	$user = $_POST[ 'username' ];
@@ -77,5 +79,7 @@ if( isset( $_POST[ 'submit' ] ) ) {
 	$data->execute();
 }
 
+// Generate Anti-CSRF token
+generateSessionToken();
 
 ?>

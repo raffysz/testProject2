@@ -21,12 +21,14 @@
     <div class="formbox">
         <h3>Login Form</h3>
         <br><br>
-        <form method="post" action="">
-            <label>Username:</label><br>
-            <input type="text" name="username" placeholder="username" /><br><br>
-            <label>Password:</label><br>
-            <input type="password" name="password" placeholder="password" />  <br><br>
-            <input type="submit" name="submit" value="Login" />
+        <form action="#" method="POST">
+            Username:<br>
+            <input type="text" name="username"><br>
+            Password:<br>
+            <input type="password" autocomplete="off" name="password"><br>
+            <br>
+            <input type="submit" value="Login" name="Login">
+            <input type="hidden" name="user_token" value="815d67cbc3912915704adc69c408c005">
         </form>
         <div class="error"><?php echo $error;?></div>
         <div class="register">You can register <a href="register.php"> here </a> </div>
