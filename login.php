@@ -16,9 +16,7 @@ if(isset($_POST["submit"]))
 
 		$password=$_POST['password'];
 		$password=mysqli_real_escape_string( $db, $password );
-
-
-
+		
 		//Check username and password from database
 		$sql="SELECT userID FROM users WHERE username='$username' and password='$password'";
 		$result=mysqli_query($db,$sql);
