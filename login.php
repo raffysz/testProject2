@@ -3,19 +3,19 @@ session_start();
 include("connection.php"); //Establishing connection with our database
 
 $error = ""; //Variable for storing our errors.
-if( isset( $_GET[ 'Login' ] ) ) {
-	if(empty($_GET["username"]) || empty($_GET["password"]))
+if( isset( $_POST[ 'Login' ] ) ) {
+	if(empty($_POST["username"]) || empty($_GET["password"]))
 	{
 		$error = "Both fields are required.";
 	}else {
 
 		// Sanitise username input
-		$user = $_GET['username'];
+		$user = $_POST['username'];
 		$user = stripslashes($user);
 		$user = mysql_real_escape_string($user);
 
 		// Sanitise password input
-		$pass = $_GET['password'];
+		$pass = $_POST['password'];
 		$pass = stripslashes($pass);
 		$pass = mysql_real_escape_string($pass);
 
