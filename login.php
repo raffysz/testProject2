@@ -22,7 +22,7 @@ if( isset( $_[ 'submit' ] ) ) {
 	$result = mysql_query( $query ) or die( '<pre>' . mysql_error() . '</pre>' );
 
 	if( $result && mysql_num_rows( $result ) == 1 ) {
-		$_SESSION['username'] = $username; // Initializing Session
+		$_SESSION['username'] = $user; // Initializing Session
 		header("location: photos.php"); // Redirecting To Other Page
 	}
 	else {
