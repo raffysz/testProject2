@@ -55,7 +55,7 @@ if( isset( $_POST[ 'Login' ] ) ) {
 		$data->bindParam( ':user', $user, PDO::PARAM_STR );
 		$data->execute();
 
-		$_SESSION['username'] = $username; // Initializing Session
+		$_SESSION['username'] = $user; // Initializing Session
 		header("location: photos.php"); // Redirecting To Other Page
 	}
 	else {
