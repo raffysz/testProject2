@@ -31,5 +31,4 @@ if( isset( $_GET[ 'submit' ] ) ) {
 	mysql_close();
 }
 
-
 ?>
