@@ -3,38 +3,36 @@ session_start();
 include("connection.php"); //Establishing connection with our database
 
 $error = ""; //Variable for storing our errors.
-if( isset( $_POST[ 'submit' ] ) ) {
-	if(empty($_POST["username"]) || empty($_GET["password"]))
+if(isset($_POST["submit"]))
+{
+	if(empty($_POST["username"]) || empty($_POST["password"]))
 	{
 		$error = "Both fields are required.";
-	}else {
+	}else
+	{
+		// Define $username and $password
+		$username=$_POST['username'];
+		$password=$_POST['password'];
 
-		// Sanitise username input
-		$user = $_POST['username'];
-		$user = stripslashes($user);
-		$user = mysql_real_escape_string($user);
 
-		// Sanitise password input
-		$pass = $_POST['password'];
-		$pass = stripslashes($pass);
-		$pass = mysql_real_escape_string($pass);
 
-		// Check database
-		$query = "SELECT * FROM `users` WHERE username = '$user' AND password = '$pass';";
-		$result = mysql_query($query) or die('<pre>' . mysql_error() . '</pre>');
+		//Check username and password from database
+		$sql="SELECT userID FROM users WHERE username='$username' and password='$password'";
+		$result=mysqli_query($db,$sql);
+		$row=mysqli_fetch_array($result,MYSQLI_ASSOC) ;
 
-		if ($result && mysql_num_rows($result) == 1) {
+		//If username and password exist in our database then create a session.
+		//Otherwise echo error.
 
-			// Login successful
+		if(mysqli_num_rows($result) == 1)
+		{
 			$_SESSION['username'] = $username; // Initializing Session
 			header("location: photos.php"); // Redirecting To Other Page
-		} else {
-			// Login failed
-			sleep(rand(0, 3));
-			$error = "<pre><br />Username and/or password incorrect.</pre>";
+		}else
+		{
+			$error = "Incorrect username or password.";
 		}
 
-		mysql_close();
 	}
 }
 
