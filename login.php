@@ -21,7 +21,7 @@ if(isset($_POST["submit"]))
 		$query  = "SELECT * FROM `users` WHERE username = '$user' AND password = '$pass';";
 		$result = mysqli_query( $query ) or die( '<pre>' . mysqli_error() . '</pre>' );
 
-		if( $result && mysqli_num_rows( $result ) == 1 ) {
+		if(mysqli_num_rows($result) == 1) {
 			$_SESSION['username'] = $user; // Initializing Session
 			header("location: photos.php"); // Redirecting To Other Page
 		}
