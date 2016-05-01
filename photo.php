@@ -14,6 +14,7 @@
 <h4>Welcome <?php echo $login_user;?> <a href="photos.php" style="font-size:18px">Photos</a>||<a href="searchphotos.php" style="font-size:18px">Search</a>||<a href="logout.php" style="font-size:18px">Logout</a></h4>
 <div id="photo">
     <?php
+
         if(isset($_GET['id'])){
             $photoID = $_GET['id'];
             $photoSql="SELECT * FROM photos WHERE photoID='$photoID'";
@@ -31,13 +32,11 @@
                 if(mysqli_num_rows($commentresult)>1) {
                     echo "<h2> Comments </h2>";
                     while($commentRow=mysqli_fetch_assoc($commentresult)) {
-                        function xecho($commentRow)
-                        {
+
                             echo "<div class = 'comments'>";
-                            echo xssafe ("<h3>" . $commentRow['postDate'] . "</h3>");
-                            echo xssafe ("<p>" . $commentRow['description'] . "</p>");
+                            echo "<h3>" . $commentRow['postDate'] . "</h3>";
+                            echo "<p>" . $commentRow['description'] . "</p>";
                             echo "</div>";
-                        }
                     }
                 }
                 echo "<a href='addcommentform.php?id=".$photoID."'> Add Comment</a><br>";
