@@ -10,6 +10,7 @@ if(isset($_POST["submit"])) {
     function xssafe($desc, $encoding = 'UTF-8')
     {
         return htmlspecialchars($desc, ENT_QUOTES | ENT_HTML401, $encoding);
+    }
 
 
         $photoID = $_POST["photoID"];
@@ -29,8 +30,7 @@ if(isset($_POST["submit"])) {
         } else {
             $msg = "You need to login first";
         }
-    }
 }
-    
+
 
 ?>
