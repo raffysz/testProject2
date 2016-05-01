@@ -29,12 +29,13 @@
                 $commentSql="SELECT * FROM comments WHERE photoID='$photoID'";
                 $commentresult=mysqli_query($db,$commentSql) or die(mysqli_error($db));
                 if(mysqli_num_rows($commentresult)>1) {
-                    $commentRow=mysqli_fetch_assoc($commentresult);
                     echo "<h2> Comments </h2>";
+                    while($commentRow=mysqli_fetch_assoc($commentresult)) {
                         echo "<div class = 'comments'>";
                         echo "<h3>" . $commentRow['postDate'] . "</h3>";
                         echo "<p>" . $commentRow['description'] . "</p>";
                         echo "</div>";
+                    }
                 }
                 echo "<a href='addcommentform.php?id=".$photoID."'> Add Comment</a><br>";
 
