@@ -12,8 +12,12 @@ if(isset($_POST["submit"]))
 	{
 		// Define $username and $password
 		$username=$_POST['username'];
+		$username = mysqli_real_escape_string($db, $username);
+		$username = htmlspecialchars($username);
 
 		$password=$_POST['password'];
+		$password = mysqli_real_escape_string($db, $password);
+		$password = htmlspecialchars($password);
 
 
 
