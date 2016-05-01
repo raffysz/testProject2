@@ -27,11 +27,13 @@ if(isset($_POST["submit"]))
 		$result=mysqli_query($db,$sql);
 		$row=mysqli_fetch_array($result,MYSQLI_ASSOC) ;
 
-		if((mysqli_num_rows($result) == 1) && ($row['failed_login'] >=$total_failed_login){
+		if((mysqli_num_rows($result) == 1) && ($row['failed_login'] >=$total_failed_login))
+		{
 			$error = "This account has been locked out due to too many incorrect logins";
 
 			$last_login = $row['last_login'];
-			$last_login = strtotime("{$last_login}+{$lockout_time} minutes");
+			$last_login = strtotime($last_login);
+			$timeout = strtotime("{$last_login}+{$lockout_time} minutes");
 			$timenow = strtotime("now");
 
 			if($timenow > $timeout)
@@ -50,7 +52,7 @@ if(isset($_POST["submit"]))
 		{
 			$_SESSION['username'] = $username; // Initializing Session
 
-			$sql="UPDATE users SET failed_login = '0' WHERE username = '$username";
+			$sql="UPDATE users SET failed_login = 0 WHERE username = '$username";
 
 			header("location: photos.php"); // Redirecting To Other Page
 
