@@ -8,9 +8,11 @@ if(isset($_POST["submit"]))
 {
     $title = $_POST["title"];
     $title = mysqli_real_escape_string ($db, $title);
+    $title = htmlspecialchars($title);
 
     $desc = $_POST["desc"];
     $desc = mysqli_real_escape_string ($db, $desc);
+    $desc = htmlspecialchars($desc);
 
     $url = "test";
 
