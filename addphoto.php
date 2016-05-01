@@ -30,7 +30,7 @@ if(isset($_POST["submit"]))
     }
 
    if(file_exists($target_file)){
-       $msg = "Sorry, file already exists.";
+       echo "Sorry, file already exists.";
        $uploadOk = 0;
    }
 
