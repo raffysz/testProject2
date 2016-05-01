@@ -27,7 +27,7 @@ include("addphoto.php");
         <input type="submit" name="submit" value="Submit Photo" />
     </form>
     <div class="msg"><?php echo $msg;?></div>
-    <div class="msg"><?php echo $error;?></div>
+    <div class="msg"><?php echo $errors;?></div>
 </div>
     </div>
 </body>
