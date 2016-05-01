@@ -65,7 +65,7 @@ if(isset($_POST["submit"]))
 			$sql="UPDATE users SET failed_login = (failed_login + 1) WHERE username = '$username";
 		}
 
-		$sql="UPDATE users SET last_login = NOW() WHERE username = '$username";
+		$sql="INSERT INTO users (last_login) VALUES (NOW()) WHERE username = '$username";
 
 	}
 }
