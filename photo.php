@@ -42,8 +42,8 @@
                     while($commentRow=mysqli_fetch_assoc($commentresult)) {
 
                             echo "<div class = 'comments'>";
-                            echo "<h3>" . $commentRow['postDate'] . "</h3>";
-                            echo "<p>" . $commentRow['description'] . "</p>";
+                            echo "<h3>" . xecho($commentRow['postDate']) . "</h3>";
+                            echo "<p>" . xecho($commentRow['description']) . "</p>";
                             echo "</div>";
                     }
                 }
