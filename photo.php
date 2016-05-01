@@ -31,10 +31,13 @@
                 if(mysqli_num_rows($commentresult)>1) {
                     echo "<h2> Comments </h2>";
                     while($commentRow=mysqli_fetch_assoc($commentresult)) {
-                        echo "<div class = 'comments'>";
-                        echo "<h3>" . $commentRow['postDate'] . "</h3>";
-                        echo "<p>" . $commentRow['description'] . "</p>";
-                        echo "</div>";
+                        function xecho($commentRow)
+                        {
+                            echo "<div class = 'comments'>";
+                            echo "<h3>" . $commentRow['postDate'] . "</h3>";
+                            echo "<p>" . $commentRow['description'] . "</p>";
+                            echo "</div>";
+                        }
                     }
                 }
                 echo "<a href='addcommentform.php?id=".$photoID."'> Add Comment</a><br>";
