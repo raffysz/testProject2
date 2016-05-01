@@ -34,8 +34,8 @@
                         function xecho($commentRow)
                         {
                             echo "<div class = 'comments'>";
-                            echo "<h3>" . $commentRow['postDate'] . "</h3>";
-                            echo "<p>" . $commentRow['description'] . "</p>";
+                            echo xssafe ("<h3>" . $commentRow['postDate'] . "</h3>");
+                            echo xssafe ("<p>" . $commentRow['description'] . "</p>");
                             echo "</div>";
                         }
                     }
