@@ -63,9 +63,14 @@ if(isset($_POST["submit"]))
 			$msg = "If this is the case, please try again in {$lockout_time} minutes";
 
 			$sql="UPDATE users SET failed_login = (failed_login + 1) WHERE username = '$username";
+			$result=mysqli_query($db,$sql);
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC) ;
+
 		}
 
 		$sql="INSERT INTO users (last_login) VALUES (NOW()) WHERE username = '$username";
+		$result=mysqli_query($db,$sql);
+		$row=mysqli_fetch_array($result,MYSQLI_ASSOC) ;
 
 	}
 }
