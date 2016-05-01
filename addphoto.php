@@ -3,6 +3,7 @@ session_start();
 include("connection.php"); //Establishing connection with our database
 
 $msg = ""; //Variable for storing our errors.
+$errors = ""; //Variable for storing our errors.
 if(isset($_POST["submit"]))
 {
     $title = $_POST["title"];
@@ -25,17 +26,17 @@ if(isset($_POST["submit"]))
         $msg = "File is an image -" .$check["mime"]. ".";
         $uploadOk = 1;
     }else{
-        $msg = "File is not an image.";
+        $errors = "File is not an image.";
         $uploadOk = 0;
     }
 
    if(file_exists($target_file)){
-       echo "Sorry, file already exists.";
+       $errors = "Sorry, file already exists.";
        $uploadOk = 0;
    }
 
-    if($_FILE["fileToUpload"]["size"] > 500000){
-        $msg = "Sorry, your file is too large.";
+    if($_FILES["fileToUpload"]["size"] > 500000){
+        $errors = "Sorry, your file is too large.";
         $uploadOk = 0;
     }
 
@@ -43,7 +44,7 @@ if(isset($_POST["submit"]))
         $imageFileType !="png" &&
         $imageFileType !="jpeg" &&
         $imageFileType !="gif"){
-        $msg = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $errors = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
     }
 
