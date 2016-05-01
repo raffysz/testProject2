@@ -7,6 +7,11 @@ if(isset($_POST["submit"]))
 {
 
     $desc = $_POST["desc"];
+    $desc = mysqli_real_escape_string ($db, $desc);
+    function xssafe($desc,$encoding='UTF-8'){
+        return htmlspecialchars($desc, ENT_QUOTES | ENT_HTML401,$encoding);
+    }
+
     $photoID = $_POST["photoID"];
     $name = $_SESSION["username"];
 
